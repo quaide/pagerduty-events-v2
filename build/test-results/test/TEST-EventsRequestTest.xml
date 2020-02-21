@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="EventsRequestTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-02-21T19:57:48" hostname="DESKTOP-COI2KMT" time="0.083">
+  <properties/>
+  <testcase name="EventsRequest" classname="EventsRequestTest" time="0.083"/>
+  <system-out><![CDATA[{"payload":{"summary":null,"source":null,"severity":null,"timestamp":null,"component":null,"group":null,"payloadClass":null,"customDetails":null},"routing_key":null,"event_action":null,"dedup_key":null,"images":null,"links":null}
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
