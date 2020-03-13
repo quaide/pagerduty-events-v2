@@ -8,6 +8,7 @@ public class Payload {
     private String component;
     private String group;
     private String payloadClass;
+
     private Object customDetails;
 
     public String getSummary() {
@@ -71,6 +72,17 @@ public class Payload {
     }
 
     public void setCustomDetails(Object customDetails) {
+        this.customDetails = customDetails;
+    }
+
+    public Payload(String summary, String source, String severity, Timestamp timestamp, String component, String group, String payloadClass, Object customDetails) {
+        this.summary = summary;
+        this.source = source;
+        this.severity = severity;
+        this.timestamp = timestamp;
+        this.component = component;
+        this.group = group;
+        this.payloadClass = payloadClass;
         this.customDetails = customDetails;
     }
 }

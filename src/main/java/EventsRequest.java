@@ -1,4 +1,5 @@
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jdk.jfr.Event;
 
 public class EventsRequest {
     @JsonProperty("payload")
@@ -18,5 +19,12 @@ public class EventsRequest {
 
     @JsonProperty("links")
     Object[] linkArray;
+
+    public EventsRequest(String routingKey, String eventAction, String dedupKey, Payload payload) {
+        this.routingKey = routingKey;
+        this.eventAction = eventAction;
+        this.dedupKey = dedupKey;
+        this.payload = payload;
+    }
 
 }
