@@ -1,9 +1,8 @@
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jdk.jfr.Event;
 
 public class EventsRequest {
     @JsonProperty("payload")
-    private Payload payload = new Payload();
+    private Payload payload;
 
     @JsonProperty("routing_key")
     private String routingKey;
