@@ -29,7 +29,7 @@ public class PayloadTest {
         Assertions.assertThrows(IllegalStateException.class, () -> {
             Payload payload = Payload.builder()
                 .summary("summary")
-                .source("source")
+                .severity("source")
                 .build();
             }
         );
