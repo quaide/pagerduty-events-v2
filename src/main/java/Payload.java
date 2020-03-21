@@ -1,13 +1,23 @@
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.Instant;
 
 public class Payload {
+    @JsonProperty
     private String summary;
+    @JsonProperty
     private String source;
+    @JsonProperty
     private String severity;
+    @JsonProperty
     private Instant timestamp;
+    @JsonProperty
     private String component;
+    @JsonProperty
     private String group;
+    @JsonProperty("class")
     private String payloadClass;
+    @JsonProperty("custom_details")
     private Object customDetails;
 
     public String getSummary() {

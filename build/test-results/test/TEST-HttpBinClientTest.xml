@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="HttpBinClientTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-03-21T18:32:07" hostname="DESKTOP-COI2KMT" time="1.075">
+  <properties/>
+  <testcase name="post()" classname="HttpBinClientTest" time="1.075"/>
+  <system-out><![CDATA[202
+{"status":"success","message":"Event processed","dedup_key":"c314367a2dfd4c1d8e9ebff45c7cb007"}
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
