@@ -14,16 +14,17 @@ public class PagerDutyEventsV2Client {
 
     public HttpResponse<String> post() throws IOException, InterruptedException {
         // json formatted data
-        EventsRequest eventsRequest = new EventsRequest(
-                "fe986131749f41eaa68cd7dfb544128b",
-                "trigger",
-                "",
-                Payload.builder()
-                    .summary("test alert")
-                    .severity("info")
-                    .source("test source")
-                    .build()
-        );
+        Payload payload = Payload.builder()
+                .summary("test alert")
+                .severity("info")
+                .source("test source")
+                .build();
+        EventsRequest eventsRequest = EventsRequest.builder()
+                .routingKey("fe986131749f41eaa68cd7dfb544128b")
+                .eventAction("trigger")
+                .dedupKey("")
+                .payload(payload)
+                .build();
 
         String json = new ObjectMapper().writeValueAsString(eventsRequest);
 

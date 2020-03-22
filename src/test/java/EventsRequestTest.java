@@ -1,14 +1,50 @@
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-//public class EventsRequestTest {
-//
-//    @Test
-//    public void EventsRequest() throws JsonProcessingException {
-//        EventsRequest eventsRequest = new EventsRequest();
-//
-//        String json = new ObjectMapper().writeValueAsString(eventsRequest);
-//        System.out.println(json);
-//    }
-//}
+public class EventsRequestTest {
+
+    @Test
+    public void routingKeyRequired() {
+        Payload payload = Payload.builder()
+            .source("source")
+            .summary("summary")
+            .severity("severity")
+            .build();
+
+        Assertions.assertThrows(IllegalStateException.class, () -> {
+            EventsRequest eventsRequest = EventsRequest.builder()
+                .eventAction("trigger")
+                .payload(payload)
+                .build();
+            }
+        );
+    }
+
+    @Test
+    public void eventActionRequired() {
+        Payload payload = Payload.builder()
+                .source("source")
+                .summary("summary")
+                .severity("severity")
+                .build();
+
+        Assertions.assertThrows(IllegalStateException.class, () -> {
+                    EventsRequest eventsRequest = EventsRequest.builder()
+                            .routingKey("routing key")
+                            .payload(payload)
+                            .build();
+                }
+        );
+    }
+
+    @Test
+    public void payloadRequired() {
+        Assertions.assertThrows(IllegalStateException.class, () -> {
+                    EventsRequest eventsRequest = EventsRequest.builder()
+                            .eventAction("trigger")
+                            .routingKey("routing key")
+                            .build();
+                }
+        );
+    }
+}
