@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="EventsRequestTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-03-22T16:09:11" hostname="DESKTOP-COI2KMT" time="0.02">
+<testsuite name="EventsRequestTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-03-24T21:27:49" hostname="DESKTOP-COI2KMT" time="0.024">
   <properties/>
-  <testcase name="routingKeyRequired()" classname="EventsRequestTest" time="0.02"/>
+  <testcase name="routingKeyRequired()" classname="EventsRequestTest" time="0.024"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

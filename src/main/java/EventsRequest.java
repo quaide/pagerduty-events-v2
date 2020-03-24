@@ -1,12 +1,18 @@
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class EventsRequest {
+    public enum EventAction {
+        trigger,
+        acknoledge,
+        resolve;
+    }
+
     @JsonProperty("payload")
     private Payload payload;
     @JsonProperty("routing_key")
     private String routingKey;
     @JsonProperty("event_action")
-    private String eventAction;
+    private EventAction eventAction;
     @JsonProperty("dedup_key")
     private String dedupKey;
     @JsonProperty("images")
@@ -22,7 +28,7 @@ public class EventsRequest {
         return routingKey;
     }
 
-    public String getEventAction() {
+    public EventAction getEventAction() {
         return eventAction;
     }
 
@@ -40,7 +46,7 @@ public class EventsRequest {
 
     private EventsRequest(
             String routingKey,
-            String eventAction,
+            EventAction eventAction,
             String dedupKey,
             Payload payload,
             Object[] imageArray,
@@ -69,7 +75,7 @@ public class EventsRequest {
     static class Builder {
         private Payload payload;
         private String routingKey;
-        private String eventAction;
+        private EventAction eventAction;
         private String dedupKey;
         Object[] imageArray;
         Object[] linkArray;
@@ -88,7 +94,7 @@ public class EventsRequest {
             return this;
         }
 
-        public Builder eventAction(String eventAction) {
+        public Builder eventAction(EventAction eventAction) {
             this.eventAction = eventAction;
             return this;
         }

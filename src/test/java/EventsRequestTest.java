@@ -13,7 +13,7 @@ public class EventsRequestTest {
 
         Assertions.assertThrows(IllegalStateException.class, () -> {
             EventsRequest eventsRequest = EventsRequest.builder()
-                .eventAction("trigger")
+                .eventAction(EventsRequest.EventAction.trigger)
                 .payload(payload)
                 .build();
             }
@@ -41,7 +41,7 @@ public class EventsRequestTest {
     public void payloadRequired() {
         Assertions.assertThrows(IllegalStateException.class, () -> {
                     EventsRequest eventsRequest = EventsRequest.builder()
-                            .eventAction("trigger")
+                            .eventAction(EventsRequest.EventAction.trigger)
                             .routingKey("routing key")
                             .build();
                 }

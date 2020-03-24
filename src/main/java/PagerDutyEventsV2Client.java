@@ -21,7 +21,7 @@ public class PagerDutyEventsV2Client {
                 .build();
         EventsRequest eventsRequest = EventsRequest.builder()
                 .routingKey("fe986131749f41eaa68cd7dfb544128b")
-                .eventAction("trigger")
+                .eventAction(EventsRequest.EventAction.trigger)
                 .dedupKey("")
                 .payload(payload)
                 .build();
