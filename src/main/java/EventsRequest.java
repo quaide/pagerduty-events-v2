@@ -3,7 +3,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class EventsRequest {
     public enum EventAction {
         trigger,
-        acknoledge,
+        acknowledge,
         resolve;
     }
 
@@ -57,9 +57,26 @@ public class EventsRequest {
         if(eventAction == null) {
             throw new IllegalStateException("Event Action is required on class EventsRequest");
         }
-        if(payload == null) {
-            throw new IllegalStateException("Payload is required on class EventsRequest");
+
+        if(eventAction.equals(EventAction.trigger)) {
+            //routingKey, eventAction are required
+            //already handled
+            if(payload == null) {
+                throw new IllegalStateException("Payload is required on class EventsRequest");
+            }
         }
+        if(eventAction.equals(EventAction.acknowledge)) {
+            if(dedupKey == null) {
+                throw new IllegalStateException("Dedup Key is required to acknowledge an event");
+            }
+            //if payload != null?
+        }
+        if(eventAction.equals(EventAction.resolve)) {
+            if(dedupKey == null) {
+                throw new IllegalStateException("Dedup Key is required to resolve an event");
+            }
+        }
+
         this.routingKey = routingKey;
         this.eventAction = eventAction;
         this.dedupKey = dedupKey;

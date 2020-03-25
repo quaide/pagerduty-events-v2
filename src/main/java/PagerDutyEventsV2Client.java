@@ -12,21 +12,13 @@ public class PagerDutyEventsV2Client {
             .version(HttpClient.Version.HTTP_1_1)
             .build();
 
-    public HttpResponse<String> post() throws IOException, InterruptedException {
-        // json formatted data
-        Payload payload = Payload.builder()
-                .summary("test alert")
-                .severity("info")
-                .source("test source")
-                .build();
-        EventsRequest eventsRequest = EventsRequest.builder()
-                .routingKey("fe986131749f41eaa68cd7dfb544128b")
-                .eventAction(EventsRequest.EventAction.trigger)
-                .dedupKey("")
-                .payload(payload)
-                .build();
+    public EventsResponse post(EventsRequest eventsRequest) throws IOException, InterruptedException {
 
-        String json = new ObjectMapper().writeValueAsString(eventsRequest);
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        EventsResponse eventsResponse;
+
+        String json = objectMapper.writeValueAsString(eventsRequest);
 
         // add json header
         HttpRequest request = HttpRequest.newBuilder()
@@ -37,12 +29,30 @@ public class PagerDutyEventsV2Client {
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
+        String jsonResponse = response.body();
+
+        if(response.statusCode() == 202) {
+            eventsResponse = objectMapper.readValue(jsonResponse, EventsResponse.class);
+        }
+        else if(response.statusCode() == 400) {
+            eventsResponse = objectMapper.readValue(jsonResponse, EventsResponse.class);
+        }
+//        else if(response.statusCode() == 429 ){
+//
+//        }
+//        else if(response.statusCode() >= 500 ){
+//
+//        }
+        else {
+            eventsResponse = objectMapper.readValue(jsonResponse, EventsResponse.class);
+        }
+
         // print status code
         System.out.println(response.statusCode());
 
         // print response body
         System.out.println(response.body());
 
-        return response;
+        return eventsResponse;
     }
 }

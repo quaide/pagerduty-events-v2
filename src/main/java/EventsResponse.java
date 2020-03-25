@@ -9,4 +9,20 @@ public class EventsResponse {
     private String dedupKey;
     @JsonProperty
     private String[] errors;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public String getDedupKey() {
+        return dedupKey;
+    }
+
+    public String[] getErrors() {
+        return errors;
+    }
 }
