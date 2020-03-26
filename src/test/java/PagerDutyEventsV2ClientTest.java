@@ -16,7 +16,7 @@ public class PagerDutyEventsV2ClientTest {
         EventsRequest eventsRequest = EventsRequest.builder()
                 .routingKey("fe986131749f41eaa68cd7dfb544128b")
                 .eventAction(EventsRequest.EventAction.trigger)
-                .dedupKey("")
+                .dedupKey("60cf136dff0a4dde9044f8e0cc606d99")
                 .payload(payload)
                 .build();
 
@@ -26,6 +26,8 @@ public class PagerDutyEventsV2ClientTest {
 
         //Updated 'expected' to reflect lack of status code in object
         Assertions.assertEquals("success", eventsResponse.getStatus());
+
+        Assertions.assertEquals("trigger", eventsRequest.getEventAction().toString());
     }
 
     @Test
@@ -41,6 +43,8 @@ public class PagerDutyEventsV2ClientTest {
         EventsResponse eventsResponse = pagerDutyEventsV2Client.post(eventsRequest);
 
         Assertions.assertEquals("success", eventsResponse.getStatus());
+
+        Assertions.assertEquals("acknowledge", eventsRequest.getEventAction().toString());
     }
 }
 

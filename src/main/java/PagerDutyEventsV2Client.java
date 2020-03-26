@@ -20,7 +20,6 @@ public class PagerDutyEventsV2Client {
 
         String json = objectMapper.writeValueAsString(eventsRequest);
 
-        // add json header
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.ofString(json))
                 .uri(URI.create("https://events.pagerduty.com/v2/enqueue"))
@@ -31,21 +30,7 @@ public class PagerDutyEventsV2Client {
 
         String jsonResponse = response.body();
 
-        if(response.statusCode() == 202) {
-            eventsResponse = objectMapper.readValue(jsonResponse, EventsResponse.class);
-        }
-        else if(response.statusCode() == 400) {
-            eventsResponse = objectMapper.readValue(jsonResponse, EventsResponse.class);
-        }
-//        else if(response.statusCode() == 429 ){
-//
-//        }
-//        else if(response.statusCode() >= 500 ){
-//
-//        }
-        else {
-            eventsResponse = objectMapper.readValue(jsonResponse, EventsResponse.class);
-        }
+        eventsResponse = objectMapper.readValue(jsonResponse, EventsResponse.class);
 
         // print status code
         System.out.println(response.statusCode());
