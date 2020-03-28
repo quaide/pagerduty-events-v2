@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="PagerDutyEventsV2ClientTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-03-26T21:52:32" hostname="DESKTOP-COI2KMT" time="0.848">
+<testsuite name="PagerDutyEventsV2ClientTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-03-28T20:26:15" hostname="DESKTOP-COI2KMT" time="0.86">
   <properties/>
-  <testcase name="postAcknowledge()" classname="PagerDutyEventsV2ClientTest" time="0.848"/>
-  <system-out><![CDATA[202
-{"status":"success","message":"Event processed","dedup_key":"60cf136dff0a4dde9044f8e0cc606d99"}
-]]></system-out>
+  <testcase name="postAcknowledge()" classname="PagerDutyEventsV2ClientTest" time="0.86"/>
+  <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

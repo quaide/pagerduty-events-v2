@@ -16,7 +16,7 @@ public class EventsRequest {
     @JsonProperty("dedup_key")
     private String dedupKey;
     @JsonProperty("images")
-    Object[] imageArray;
+    Object[] images;
     @JsonProperty("links")
     Object[] linkArray;
 
@@ -36,53 +36,45 @@ public class EventsRequest {
         return dedupKey;
     }
 
-    public Object[] getImageArray() {
-        return imageArray;
+    public Object[] getImages() {
+        return images;
     }
 
     public Object[] getLinkArray() {
         return linkArray;
     }
 
-    private EventsRequest(
-            String routingKey,
-            EventAction eventAction,
-            String dedupKey,
-            Payload payload,
-            Object[] imageArray,
-            Object[] linkArray) {
-        if(routingKey == null) {
+    private EventsRequest(Builder builder) {
+        if(builder.routingKey == null) {
             throw new IllegalStateException("Routing Key is required on class EventsRequest");
         }
-        if(eventAction == null) {
+        if(builder.eventAction == null) {
             throw new IllegalStateException("Event Action is required on class EventsRequest");
         }
 
-        if(eventAction.equals(EventAction.trigger)) {
-            //routingKey, eventAction are required
-            //already handled
-            if(payload == null) {
+        if(builder.eventAction.equals(EventAction.trigger)) {
+            if(builder.payload == null) {
                 throw new IllegalStateException("Payload is required on class EventsRequest");
             }
         }
-        if(eventAction.equals(EventAction.acknowledge)) {
-            if(dedupKey == null) {
+        if(builder.eventAction.equals(EventAction.acknowledge)) {
+            if(builder.dedupKey == null) {
                 throw new IllegalStateException("Dedup Key is required to acknowledge an event");
             }
-            //if payload != null?
         }
-        if(eventAction.equals(EventAction.resolve)) {
-            if(dedupKey == null) {
+
+        if(builder.eventAction.equals(EventAction.resolve)) {
+            if(builder.dedupKey == null) {
                 throw new IllegalStateException("Dedup Key is required to resolve an event");
             }
         }
 
-        this.routingKey = routingKey;
-        this.eventAction = eventAction;
-        this.dedupKey = dedupKey;
-        this.payload = payload;
-        this.imageArray = imageArray;
-        this.linkArray = linkArray;
+        this.routingKey = builder.routingKey;
+        this.eventAction = builder.eventAction;
+        this.dedupKey = builder.dedupKey;
+        this.payload = builder.payload;
+        this.images = builder.images;
+        this.linkArray = builder.linkArray;
     }
 
     public static Builder builder() {
@@ -94,7 +86,7 @@ public class EventsRequest {
         private String routingKey;
         private EventAction eventAction;
         private String dedupKey;
-        Object[] imageArray;
+        Object[] images;
         Object[] linkArray;
 
         private Builder() {
@@ -122,7 +114,7 @@ public class EventsRequest {
         }
 
         public Builder imageArray(Object[] imageArray) {
-            this.imageArray = imageArray;
+            this.images = imageArray;
             return this;
         }
 
@@ -132,14 +124,7 @@ public class EventsRequest {
         }
 
         public EventsRequest build() {
-            return new EventsRequest(
-                    this.routingKey,
-                    this.eventAction,
-                    this.dedupKey,
-                    this.payload,
-                    this.imageArray,
-                    this.linkArray
-            );
+            return new EventsRequest(this);
         }
     }
 }

@@ -7,7 +7,6 @@ public class PagerDutyEventsV2ClientTest {
 
     @Test
     public void postTrigger() throws IOException, InterruptedException {
-        //moved builders to Test class to reflect changes to post() method
         Payload payload = Payload.builder()
                 .summary("test alert")
                 .severity("info")
@@ -19,15 +18,14 @@ public class PagerDutyEventsV2ClientTest {
                 .dedupKey("60cf136dff0a4dde9044f8e0cc606d99")
                 .payload(payload)
                 .build();
-
         PagerDutyEventsV2Client pagerDutyEventsV2Client = new PagerDutyEventsV2Client();
 
         EventsResponse eventsResponse = pagerDutyEventsV2Client.post(eventsRequest);
 
-        //Updated 'expected' to reflect lack of status code in object
         Assertions.assertEquals("success", eventsResponse.getStatus());
-
-        Assertions.assertEquals("trigger", eventsRequest.getEventAction().toString());
+        Assertions.assertEquals("60cf136dff0a4dde9044f8e0cc606d99", eventsResponse.getDedupKey());
+        Assertions.assertEquals("Event processed", eventsResponse.getMessage());
+        Assertions.assertNull(eventsResponse.getErrors());
     }
 
     @Test
@@ -37,14 +35,11 @@ public class PagerDutyEventsV2ClientTest {
             .dedupKey("60cf136dff0a4dde9044f8e0cc606d99")
             .eventAction(EventsRequest.EventAction.acknowledge)
             .build();
-
         PagerDutyEventsV2Client pagerDutyEventsV2Client = new PagerDutyEventsV2Client();
 
         EventsResponse eventsResponse = pagerDutyEventsV2Client.post(eventsRequest);
 
         Assertions.assertEquals("success", eventsResponse.getStatus());
-
-        Assertions.assertEquals("acknowledge", eventsRequest.getEventAction().toString());
     }
 }
 
