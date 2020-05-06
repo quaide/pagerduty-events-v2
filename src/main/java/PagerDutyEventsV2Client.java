@@ -10,9 +10,11 @@ import java.net.http.HttpResponse;
 public class PagerDutyEventsV2Client {
 
     private final static ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-    private final static HttpClient HTTP_CLIENT = HttpClient.newBuilder()
-            .version(HttpClient.Version.HTTP_1_1)
-            .build();
+    private final HttpClient httpClient;
+
+    public PagerDutyEventsV2Client(HttpClient httpClient) {
+        this.httpClient = httpClient;
+    }
 
     public EventsResponse post(EventsRequest eventsRequest) throws IOException, InterruptedException {
         String json = OBJECT_MAPPER.writeValueAsString(eventsRequest);
@@ -21,7 +23,8 @@ public class PagerDutyEventsV2Client {
                 .uri(URI.create("https://events.pagerduty.com/v2/enqueue"))
                 .header("Content-Type", "application/json")
                 .build();
-        HttpResponse<String> response = HTTP_CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
         return OBJECT_MAPPER.readValue(response.body(), EventsResponse.class);
     }
 }
