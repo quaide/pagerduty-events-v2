@@ -1,10 +1,11 @@
 plugins {
     id 'java'
+    id 'jacoco'
 }
 
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 1.13
+sourceCompatibility = 1.14
 
 repositories {
     mavenCentral()
@@ -36,3 +37,31 @@ test {
         events "passed", "skipped", "failed"
     }
 }
+
+jacoco {
+    toolVersion = '0.8.5'
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.enabled true
+    }
+}
+test.finalizedBy jacocoTestReport
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            //includes = ['src/main/java/*']
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.0
+            }
+        }
+    }
+}
+
+check.dependsOn jacocoTestCoverageVerification

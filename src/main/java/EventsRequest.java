@@ -1,5 +1,7 @@
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Optional;
+
 public class EventsRequest {
     public enum EventAction {
         trigger,
@@ -14,11 +16,11 @@ public class EventsRequest {
     @JsonProperty("event_action")
     private EventAction eventAction;
     @JsonProperty("dedup_key")
-    private String dedupKey;
+    private Optional<String> dedupKey;
     @JsonProperty("images")
-    Object[] images;
+    private Optional<Object[]> images;
     @JsonProperty("links")
-    Object[] linkArray;
+    private Optional<Object[]> linkArray;
 
     public Payload getPayload() {
         return payload;
@@ -32,15 +34,15 @@ public class EventsRequest {
         return eventAction;
     }
 
-    public String getDedupKey() {
+    public Optional<String> getDedupKey() {
         return dedupKey;
     }
 
-    public Object[] getImages() {
+    public Optional<Object[]> getImages() {
         return images;
     }
 
-    public Object[] getLinkArray() {
+    public Optional<Object[]> getLinkArray() {
         return linkArray;
     }
 
@@ -58,13 +60,13 @@ public class EventsRequest {
             }
         }
         if(builder.eventAction.equals(EventAction.acknowledge)) {
-            if(builder.dedupKey == null) {
+            if(builder.dedupKey.isEmpty()) {
                 throw new IllegalStateException("Dedup Key is required to acknowledge an event");
             }
         }
 
         if(builder.eventAction.equals(EventAction.resolve)) {
-            if(builder.dedupKey == null) {
+            if(builder.dedupKey.isEmpty()) {
                 throw new IllegalStateException("Dedup Key is required to resolve an event");
             }
         }
@@ -85,9 +87,9 @@ public class EventsRequest {
         private Payload payload;
         private String routingKey;
         private EventAction eventAction;
-        private String dedupKey;
-        Object[] images;
-        Object[] linkArray;
+        private Optional<String> dedupKey;
+        Optional<Object[]> images;
+        Optional<Object[]> linkArray;
 
         private Builder() {
 
@@ -109,17 +111,17 @@ public class EventsRequest {
         }
 
         public Builder dedupKey(String dedupKey) {
-            this.dedupKey = dedupKey;
+            this.dedupKey = Optional.ofNullable(dedupKey);
             return this;
         }
 
         public Builder imageArray(Object[] imageArray) {
-            this.images = imageArray;
+            this.images = Optional.of(imageArray);
             return this;
         }
 
         public Builder linkArray(Object[] linkArray) {
-            this.linkArray = linkArray;
+            this.linkArray = Optional.ofNullable(linkArray);
             return this;
         }
 
