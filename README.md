@@ -7,3 +7,14 @@ A lightweight and flexible client designed to work with PagerDuty Events API. Sp
 ### Prerequisites
 
 ### Installation
+
+## Deployment
+
+## Built With
+- Maven: Dependency Management
+
+## Authors
+- [Mitchell Irvin](http://mitchell-irvin.com/): Mentor and code guidance through industry experience
+- [Quaide Tranter](http://www.quaidetranter.com): Development and practice through experience
+
+## License
