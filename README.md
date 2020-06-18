@@ -4,6 +4,6 @@ A lightweight and flexible client designed to work with PagerDuty Events API. Sp
 
 ## Getting Started
 
-##### Prerequisites
+#### Prerequisites
 
-##### Installation
+#### Installation
