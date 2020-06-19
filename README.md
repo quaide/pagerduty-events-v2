@@ -8,10 +8,12 @@ A lightweight and flexible Java client designed to work with the [PagerDuty Even
 
 ### Installation
 
-## Deployment
+### Usage
 
 ## Built With
-- Maven: Dependency Management
+- [Java](https://openjdk.java.net/)
+- [Maven](https://maven.apache.org/)
+- [Gradle](https://gradle.org/)
 
 ## Authors
 - [Quaide Tranter](http://www.quaidetranter.com)
