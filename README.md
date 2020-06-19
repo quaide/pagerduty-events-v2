@@ -1,6 +1,6 @@
 # PagerDuty Events v2
 
-A lightweight and flexible client designed to work with PagerDuty Events API. Specifically, this client allows for the manipulation of incident events within the PagerDuty service. This client allows will POST Http requests to the PagerDuty API in order to *trigger*, *acknowledge*, and *resolve* events through the PagerDuty service. 
+A lightweight and flexible Java client designed to work with the [PagerDuty Events V2 API](https://developer.pagerduty.com/docs/events-api-v2/overview/). This allows for the manipulation of incidents within the PagerDuty service, specifically via the *trigger*, *acknowledge*, and *resolve* actions.
 
 ## Getting Started
 
@@ -14,7 +14,7 @@ A lightweight and flexible client designed to work with PagerDuty Events API. Sp
 - Maven: Dependency Management
 
 ## Authors
-- [Mitchell Irvin](http://mitchell-irvin.com/): Mentor and code guidance through industry experience
-- [Quaide Tranter](http://www.quaidetranter.com): Development and practice through experience
+- [Quaide Tranter](http://www.quaidetranter.com)
+- [Mitchell Irvin](https://github.com/mitchellirvin)
 
 ## License
