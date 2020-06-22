@@ -27,6 +27,7 @@ public class PagerDutyEventsV2ClientTest {
     @Mock
     private HttpResponse<String> mockHttpResponse;
     private final PagerDutyEventsV2Client pagerDutyEventsV2Client = new PagerDutyEventsV2Client(mockHttpClient);
+    private PagerDutyEvents pagerDutyEvents;
 
     @BeforeEach
     public void setUp() throws IOException, InterruptedException {
@@ -89,7 +90,7 @@ public class PagerDutyEventsV2ClientTest {
                 .routingKey(ROUTING_KEY)
                 .dedupKey(DEDUP_KEY)
                 .eventAction(eventAction)
-                .build();
+                  .build();
     }
 
 

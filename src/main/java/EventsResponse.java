@@ -10,6 +10,7 @@ public class EventsResponse {
     @JsonProperty
     private String[] errors;
 
+
     public String getStatus() {
         return status;
     }

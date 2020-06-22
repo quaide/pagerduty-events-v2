@@ -21,6 +21,13 @@ public class PagerDutyEventsV2Client {
         this.httpClient = httpClient;
     }
 
+    /**
+     *Http Request to be sent to Pager Duty's API. Requires a JSON object that will be serialized prior
+     * to sending the request. EventsRequest object is to be built prior to calling post().
+     *
+     * @param eventsRequest The JSON object to be sent to PagerDuty API
+     * @return JSON mapped to to EventsResponse class
+     */
     public EventsResponse post(EventsRequest eventsRequest) {
         try {
             String json = OBJECT_MAPPER.writeValueAsString(eventsRequest);
