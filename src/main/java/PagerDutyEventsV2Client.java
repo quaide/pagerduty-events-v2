@@ -12,6 +12,13 @@ class PagerDutyStateException extends RuntimeException {
     }
 }
 
+/**
+ *The public API for PagerDuty Events v2 API for incident event monitoring system. This client
+ * will POST a JSON object as an API request. The constructor requires the consumer to build
+ * an HttpClient. Then, the client requires an EventsRequest object to be built prior to
+ * calling eventPost which interacts with the Events API.
+ *
+ */
 public class PagerDutyEventsV2Client {
 
     private final static ObjectMapper OBJECT_MAPPER = new ObjectMapper();

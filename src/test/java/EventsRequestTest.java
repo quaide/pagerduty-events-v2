@@ -15,7 +15,7 @@ public class EventsRequestTest {
             .build();
 
         Assertions.assertThrows(IllegalStateException.class, () -> {
-            EventsRequest eventsRequest = EventsRequest.builder()
+            EventsRequest.builder()
                 .eventAction(EventsRequest.EventAction.trigger)
                 .payload(payload)
                 .build();
@@ -32,7 +32,7 @@ public class EventsRequestTest {
                 .build();
 
         Assertions.assertThrows(IllegalStateException.class, () -> {
-                    EventsRequest eventsRequest = EventsRequest.builder()
+                    EventsRequest.builder()
                             .routingKey("routing key")
                             .payload(payload)
                             .build();
@@ -43,7 +43,7 @@ public class EventsRequestTest {
     @Test
     public void payloadRequired() {
         Assertions.assertThrows(IllegalStateException.class, () -> {
-                    EventsRequest eventsRequest = EventsRequest.builder()
+                    EventsRequest.builder()
                             .eventAction(EventsRequest.EventAction.trigger)
                             .routingKey("routing key")
                             .build();
@@ -60,7 +60,7 @@ public class EventsRequestTest {
                 .build();
 
         Assertions.assertThrows(IllegalStateException.class, () -> {
-                    EventsRequest eventsRequest = EventsRequest.builder()
+                    EventsRequest.builder()
                             .eventAction(EventsRequest.EventAction.acknowledge)
                             .routingKey("routing key")
                             .payload(payload)
@@ -70,11 +70,10 @@ public class EventsRequestTest {
     }
 
     @Test
-    public void BuilderHandlesImageArray() {
-        /*PagerDuty has specific requirements for an image object properties (src, href, alt) */
-        Object[] imageArray = new Object[1];
-        Images images = new Images("src", "href", "alt");
-        imageArray[0] = images;
+    public void builderPopulatesImages() {
+        Object[] images = new Object[1];
+        Image image = new Image("src", "href", "alt");
+        images[0] = image;
 
         Payload payload = Payload.builder()
                 .summary("test alert")
@@ -86,13 +85,14 @@ public class EventsRequestTest {
                 .eventAction(EventsRequest.EventAction.trigger)
                 .dedupKey(DEDUP_KEY)
                 .payload(payload)
-                .imageArray(imageArray)
+                .images(images)
                 .build();
+
+        Assertions.assertEquals(images, eventsRequest.getImages());
     }
 
     @Test
-    public void BuilderHandlesLinkArray() {
-        /*PagerDuty Link object has properties (href, text)? */
+    public void builderPopulatesLinks() {
         Object[] link = new Object[2];
         link[0] = "href";
         link[1] = "text";
@@ -107,7 +107,7 @@ public class EventsRequestTest {
                 .eventAction(EventsRequest.EventAction.trigger)
                 .dedupKey(DEDUP_KEY)
                 .payload(payload)
-                .linkArray(link)
+                .links(link)
                 .build();
 
     }

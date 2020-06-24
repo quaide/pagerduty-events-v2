@@ -2,7 +2,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Optional;
 
-public class Images {
+public class Image {
 
     @JsonProperty
     private String src;
@@ -11,7 +11,7 @@ public class Images {
     @JsonProperty
     private Optional<String> alt;
 
-    public Images (String src, String href, String alt) {
+    public Image(String src, String href, String alt) {
         this.src = src;
         this.href = Optional.ofNullable(href);
         this.alt = Optional.ofNullable(alt);
@@ -28,4 +28,6 @@ public class Images {
     public Optional<String> getAlt() {
         return alt;
     }
+
+    //add builder
 }
