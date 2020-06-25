@@ -14,6 +14,8 @@ A lightweight and flexible Java client designed to work with the [PagerDuty Even
 - [Java](https://openjdk.java.net/)
 - [Maven](https://maven.apache.org/)
 - [Gradle](https://gradle.org/)
+- [JaCoCo](https://www.eclemma.org/jacoco/)
+- [Mockito](https://site.mockito.org/)
 
 ## Authors
 - [Quaide Tranter](http://www.quaidetranter.com)
