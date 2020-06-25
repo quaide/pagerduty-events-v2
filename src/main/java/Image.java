@@ -29,5 +29,46 @@ public class Image {
         return alt;
     }
 
-    //add builder
+    private Image(Builder builder) {
+        if(builder.src.isEmpty()) {
+            throw new IllegalStateException("src is required for images");
+        }
+        this.src = builder.src;
+        this.href = builder.href;
+        this.alt = builder.alt;
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    static class Builder {
+        private String src;
+        private Optional<String> href;
+        private Optional<String> alt;
+
+        private Builder() {
+
+        }
+
+        public Builder src(String src) {
+            this.src = src;
+            return this;
+        }
+
+        public Builder href(String href) {
+            this.href = Optional.ofNullable(href);
+            return this;
+        }
+
+        public Builder alt(String alt) {
+            this.alt = Optional.ofNullable(alt);
+            return this;
+        }
+
+        public Image build() {
+            return new Image(this);
+        }
+
+    }
 }
