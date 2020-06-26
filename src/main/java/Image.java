@@ -11,12 +11,6 @@ public class Image {
     @JsonProperty
     private Optional<String> alt;
 
-    public Image(String src, String href, String alt) {
-        this.src = src;
-        this.href = Optional.ofNullable(href);
-        this.alt = Optional.ofNullable(alt);
-    }
-
     public String getSrc() {
         return src;
     }

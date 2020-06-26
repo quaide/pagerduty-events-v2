@@ -9,11 +9,6 @@ public class Link {
     @JsonProperty
     private Optional<String> text;
 
-    public Link(String href, String text) {
-        this.href = href;
-        this.text = Optional.ofNullable(text);
-    }
-
     public String getHref() {
         return href;
     }
