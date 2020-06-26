@@ -23,7 +23,7 @@ public class Link {
     }
 
     private Link(Builder builder) {
-        if(builder.href.isEmpty()) {
+        if(builder.href == null) {
             throw new IllegalStateException("href is required for links");
         }
         this.href = builder.href;

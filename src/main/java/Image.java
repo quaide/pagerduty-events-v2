@@ -30,7 +30,7 @@ public class Image {
     }
 
     private Image(Builder builder) {
-        if(builder.src.isEmpty()) {
+        if(builder.src == null) {
             throw new IllegalStateException("src is required for images");
         }
         this.src = builder.src;

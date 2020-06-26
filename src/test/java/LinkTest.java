@@ -15,4 +15,14 @@ public class LinkTest {
         Assertions.assertEquals("href", link.getHref());
         Assertions.assertEquals(Optional.of("text"), link.getText());
     }
+
+    @Test
+    public void hrefRequired() {
+        Assertions.assertThrows(IllegalStateException.class, () -> {
+                    Link.builder()
+                            .text("text")
+                            .build();
+                }
+        );
+    }
 }

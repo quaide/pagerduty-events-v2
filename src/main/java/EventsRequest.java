@@ -20,7 +20,7 @@ public class EventsRequest {
     @JsonProperty("images")
     private Object[] images;
     @JsonProperty("links")
-    private Optional<Object[]> links;
+    private Object[] links;
 
     public Payload getPayload() {
         return payload;
@@ -42,7 +42,7 @@ public class EventsRequest {
         return images;
     }
 
-    public Optional<Object[]> getLinks() {
+    public Object[] getLinks() {
         return links;
     }
 
@@ -84,7 +84,7 @@ public class EventsRequest {
         private EventAction eventAction;
         private Optional<String> dedupKey = Optional.empty();
         private Object[] images = new Object[0];
-        private Optional<Object[]> links = Optional.empty();
+        private Object[] links = new Object[0];
 
         private Builder() {
 
@@ -115,8 +115,8 @@ public class EventsRequest {
             return this;
         }
 
-        public Builder links(Object[] linkArray) {
-            this.links = Optional.ofNullable(linkArray);
+        public Builder links(Object[] links) {
+            this.links = links;
             return this;
         }
 

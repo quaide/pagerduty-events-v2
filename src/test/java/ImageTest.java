@@ -17,4 +17,15 @@ public class ImageTest {
         Assertions.assertEquals(Optional.of("href"), image.getHref());
         Assertions.assertEquals(Optional.of("alt"), image.getAlt());
     }
+
+    @Test
+    public void srcRequired() {
+        Assertions.assertThrows(IllegalStateException.class, () -> {
+                    Image.builder()
+                            .href("href")
+                            .alt("alt")
+                            .build();
+                }
+        );
+    }
 }
