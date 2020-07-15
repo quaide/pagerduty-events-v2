@@ -1,6 +1,8 @@
 plugins {
     id 'java'
     id 'jacoco'
+    id 'info.solidsoft.pitest' version '1.5.1'
+    id 'com.github.sherter.google-java-format' version '0.9'
 }
 
 version '1.0-SNAPSHOT'
@@ -13,30 +15,31 @@ repositories {
 
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.2'
-
-    // https://mvnrepository.com/artifact/org.mockito/mockito-junit-jupiter
     testCompile group: 'org.mockito', name: 'mockito-junit-jupiter', version: '3.3.3'
-
-
-    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.10.2'
-
-    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.2'
+    implementation 'org.pitest:pitest-junit5-plugin:0.12'
 }
 
+check.dependsOn verifyGoogleJavaFormat
+
 test {
-    // Enable JUnit 5 (Gradle 4.6+).
     useJUnitPlatform()
-
-    // Always run tests, even when nothing changed.
     dependsOn 'cleanTest'
-
-    // Show test results.
     testLogging {
         events "passed", "skipped", "failed"
     }
 }
+
+pitest {
+    threads = 4
+    outputFormats = ['HTML']
+    mutationThreshold = 100
+    targetClasses = ['pagerdutyevents.*']
+    testPlugin = "junit5"
+}
+
+check.dependsOn 'pitest'
 
 jacoco {
     toolVersion = '0.8.5'
@@ -54,11 +57,10 @@ test.finalizedBy jacocoTestReport
 jacocoTestCoverageVerification {
     violationRules {
         rule {
-            //includes = ['src/main/java/*']
             limit {
                 counter = 'LINE'
                 value = 'COVEREDRATIO'
-                minimum = 0.0
+                minimum = 1.0
             }
         }
     }
