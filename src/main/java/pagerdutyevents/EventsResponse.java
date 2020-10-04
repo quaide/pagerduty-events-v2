@@ -3,27 +3,31 @@ package pagerdutyevents;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class EventsResponse {
-  @JsonProperty private String status;
-  @JsonProperty private String message;
+    @JsonProperty
+    private String status;
 
-  @JsonProperty("dedup_key")
-  private String dedupKey;
+    @JsonProperty
+    private String message;
 
-  @JsonProperty private String[] errors;
+    @JsonProperty("dedup_key")
+    private String dedupKey;
 
-  public String getStatus() {
-    return status;
-  }
+    @JsonProperty
+    private String[] errors;
 
-  public String getMessage() {
-    return message;
-  }
+    public String getStatus() {
+        return status;
+    }
 
-  public String getDedupKey() {
-    return dedupKey;
-  }
+    public String getMessage() {
+        return message;
+    }
 
-  public String[] getErrors() {
-    return errors;
-  }
+    public String getDedupKey() {
+        return dedupKey;
+    }
+
+    public String[] getErrors() {
+        return errors;
+    }
 }

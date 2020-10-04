@@ -7,7 +7,7 @@ public class EventsRequest {
   public enum EventAction {
     trigger,
     acknowledge,
-    resolve;
+    resolve
   }
 
   @JsonProperty("payload")
