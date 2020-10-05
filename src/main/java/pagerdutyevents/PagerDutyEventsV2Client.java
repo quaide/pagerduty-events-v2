@@ -7,12 +7,6 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-class PagerDutyStateException extends RuntimeException {
-  public PagerDutyStateException(String message, Exception e) {
-    super(message, e);
-  }
-}
-
 /**
  * The public API for PagerDuty Events v2 API for incident event monitoring system. This client will
  * POST a JSON object as an API request. The constructor requires the consumer to build an
@@ -48,7 +42,7 @@ public class PagerDutyEventsV2Client {
 
       return OBJECT_MAPPER.readValue(response.body(), EventsResponse.class);
     } catch (IOException | InterruptedException e) {
-      throw new PagerDutyStateException("Incorrect Http Request State", e);
+      throw new PagerDutyStateException("Failed to POST request to pagerduty.com", e);
     }
   }
 }
