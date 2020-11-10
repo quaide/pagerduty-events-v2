@@ -4,8 +4,6 @@ A lightweight and flexible Java client designed to work with the [PagerDuty Even
 
 ## Getting Started
 
-### Prerequisites
-
 ### Installation
 
 ### Usage
