@@ -21,3 +21,5 @@ A lightweight and flexible Java client designed to work with the [PagerDuty Even
 - [Mitchell Irvin](https://github.com/mitchellirvin)
 
 ## License
+
+Licensed under the [MIT License](https://opensource.org/licenses/MIT).
