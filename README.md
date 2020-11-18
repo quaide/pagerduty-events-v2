@@ -19,7 +19,7 @@ The client can be added with your favorite dependency management tool:
 #### Gradle
 ```
 dependencies {
-    implementation 'io.github.quaide:pagerduty-events-v2-client:1.0'
+    implementation 'io.github.quaide:pagerduty-events-v2-client:1.0.1'
 }
 ```
 
