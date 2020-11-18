@@ -84,7 +84,7 @@ public class EventsRequest {
     return new Builder();
   }
 
-  static class Builder {
+  public static class Builder {
     private Payload payload;
     private String routingKey;
     private EventAction eventAction;

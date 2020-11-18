@@ -3,6 +3,8 @@ plugins {
     id 'jacoco'
     id 'info.solidsoft.pitest' version '1.5.1'
     id 'com.github.sherter.google-java-format' version '0.9'
+    id 'maven-publish'
+    id 'signing'
 }
 
 version '1.0-SNAPSHOT'
@@ -67,3 +69,61 @@ jacocoTestCoverageVerification {
 }
 
 check.dependsOn jacocoTestCoverageVerification
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'io.github.quaide'
+            artifactId = 'pagerduty-events-v2-client'
+            version = '1.0.1'
+
+            from components.java
+
+            pom {
+                name = 'PagerDuty Events v2 Client'
+                description = 'The public API for PagerDuty Events v2 API for incident event monitoring system.'
+                url = 'https://github.com/quaide/pagerduty-events-v2'
+                licenses {
+                    license {
+                        name = 'Mit License'
+                        url = 'https://opensource.org/licenses/MIT'
+                    }
+                }
+                developers {
+                    developer {
+                        name = 'Quaide Tranter'
+                        organizationUrl = 'http://www.quaidetranter.com'
+                    }
+                    developer {
+                        name = 'Mitchell Irvin'
+                        organizationUrl = 'http://mitchell-irvin.com'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/quaide/pagerduty-events-v2.git'
+                    developerConnection = 'scm:git:ssh://github.com/quaide/pagerduty-events-v2'
+                    url = 'https://github.com/quaide/pagerduty-events-v2/tree/master'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            url = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+            credentials {
+                username = ossrhUsername
+                password = ossrhPassword
+            }
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.maven
+}
+
