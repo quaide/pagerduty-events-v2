@@ -5,6 +5,23 @@ A lightweight and flexible Java client designed to work with the [PagerDuty Even
 ## Getting Started
 
 ### Installation
+The client can be added with your favorite dependency management tool:
+
+#### Maven
+```
+<dependency>
+  <groupId>io.github.quaide</groupId>
+  <artifactId>pagerduty-events-v2-client</artifactId>
+  <version>1.0.1</version>
+</dependency>
+```
+
+#### Gradle
+```
+dependencies {
+    implementation 'io.github.quaide:pagerduty-events-v2-client:1.0'
+}
+```
 
 ### Usage
 
