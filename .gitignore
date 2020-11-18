@@ -7,3 +7,4 @@
 *.ipr
 .gradle
 build/
+gradle.properties

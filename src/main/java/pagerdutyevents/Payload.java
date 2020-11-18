@@ -81,7 +81,7 @@ public class Payload {
     return new Builder();
   }
 
-  static class Builder {
+  public static class Builder {
     private String summary;
     private String source;
     private String severity;
