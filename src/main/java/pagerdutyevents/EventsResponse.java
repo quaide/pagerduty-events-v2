@@ -27,14 +27,4 @@ public class EventsResponse {
   public String[] getErrors() {
     return errors;
   }
-
-  //  @Override
-  //  public String toString() {
-  //    return "EventsResponse{" +
-  //            "status='" + status + '\'' +
-  //            ", message='" + message + '\'' +
-  //            ", dedupKey='" + dedupKey + '\'' +
-  //            ", errors=" + Arrays.toString(errors) +
-  //            '}';
-  //  }
 }
