@@ -1,6 +1,7 @@
 package pagerdutyevents;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -15,7 +16,8 @@ import java.net.http.HttpResponse;
  */
 public class PagerDutyEventsV2Client {
 
-  private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+  private static final ObjectMapper OBJECT_MAPPER =
+      new ObjectMapper().registerModule(new Jdk8Module());
   private final HttpClient httpClient;
 
   public PagerDutyEventsV2Client(HttpClient httpClient) {

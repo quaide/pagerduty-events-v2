@@ -38,8 +38,8 @@ public class Image {
 
   static class Builder {
     private String src;
-    private Optional<String> href;
-    private Optional<String> alt;
+    private Optional<String> href = Optional.empty();
+    private Optional<String> alt = Optional.empty();
 
     private Builder() {}
 

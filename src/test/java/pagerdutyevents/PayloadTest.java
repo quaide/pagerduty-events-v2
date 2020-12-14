@@ -19,7 +19,7 @@ public class PayloadTest {
     Assertions.assertThrows(
         IllegalStateException.class,
         () -> {
-          Payload.builder().severity("severity").source("source").build();
+          Payload.builder().severity(Payload.Severity.WARNING).source("source").build();
         });
   }
 
@@ -28,8 +28,27 @@ public class PayloadTest {
     Assertions.assertThrows(
         IllegalStateException.class,
         () -> {
-          Payload.builder().summary("summary").severity("source").build();
+          Payload.builder().summary("summary").severity(Payload.Severity.ERROR).build();
         });
+  }
+
+  @Test
+  public void optionalPropertiesAreEmptyWhenNotGiven() {
+    Payload payload =
+        Payload.builder()
+            .summary("summary")
+            .source("source")
+            .severity(Payload.Severity.CRITICAL)
+            .build();
+
+    Assertions.assertEquals("summary", payload.getSummary());
+    Assertions.assertEquals("source", payload.getSource());
+    Assertions.assertEquals(Payload.Severity.CRITICAL, payload.getSeverity());
+    Assertions.assertTrue(payload.getTimestamp().isEmpty());
+    Assertions.assertTrue(payload.getComponent().isEmpty());
+    Assertions.assertTrue(payload.getGroup().isEmpty());
+    Assertions.assertTrue(payload.getPayloadClass().isEmpty());
+    Assertions.assertTrue(payload.getCustomDetails().isEmpty());
   }
 
   @Test
@@ -38,7 +57,7 @@ public class PayloadTest {
         Payload.builder()
             .summary("summary")
             .source("source")
-            .severity("severity")
+            .severity(Payload.Severity.INFO)
             .timestamp(Instant.EPOCH)
             .component("component")
             .group("group")
@@ -48,11 +67,11 @@ public class PayloadTest {
 
     Assertions.assertEquals("summary", payload.getSummary());
     Assertions.assertEquals("source", payload.getSource());
-    Assertions.assertEquals("severity", payload.getSeverity());
-    Assertions.assertEquals(Instant.EPOCH, payload.getTimestamp());
-    Assertions.assertEquals("component", payload.getComponent());
-    Assertions.assertEquals("group", payload.getGroup());
-    Assertions.assertEquals("payloadClass", payload.getPayloadClass());
-    Assertions.assertEquals("custom details", payload.getCustomDetails());
+    Assertions.assertEquals(Payload.Severity.INFO, payload.getSeverity());
+    Assertions.assertEquals(Instant.EPOCH, payload.getTimestamp().orElseThrow());
+    Assertions.assertEquals("component", payload.getComponent().orElseThrow());
+    Assertions.assertEquals("group", payload.getGroup().orElseThrow());
+    Assertions.assertEquals("payloadClass", payload.getPayloadClass().orElseThrow());
+    Assertions.assertEquals("custom details", payload.getCustomDetails().orElseThrow());
   }
 }

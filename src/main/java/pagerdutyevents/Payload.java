@@ -1,21 +1,31 @@
 package pagerdutyevents;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Instant;
+import java.util.Optional;
 
+@JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class Payload {
+  public enum Severity {
+    INFO,
+    WARNING,
+    ERROR,
+    CRITICAL
+  }
+
   @JsonProperty private String summary;
   @JsonProperty private String source;
-  @JsonProperty private String severity;
-  @JsonProperty private Instant timestamp;
-  @JsonProperty private String component;
-  @JsonProperty private String group;
+  @JsonProperty private Severity severity;
+  @JsonProperty private Optional<Instant> timestamp;
+  @JsonProperty private Optional<String> component;
+  @JsonProperty private Optional<String> group;
 
   @JsonProperty("class")
-  private String payloadClass;
+  private Optional<String> payloadClass;
 
   @JsonProperty("custom_details")
-  private Object customDetails;
+  private Optional<Object> customDetails;
 
   public String getSummary() {
     return summary;
@@ -25,39 +35,39 @@ public class Payload {
     return source;
   }
 
-  public String getSeverity() {
+  public Severity getSeverity() {
     return severity;
   }
 
-  public Instant getTimestamp() {
+  public Optional<Instant> getTimestamp() {
     return timestamp;
   }
 
-  public String getComponent() {
+  public Optional<String> getComponent() {
     return component;
   }
 
-  public String getGroup() {
+  public Optional<String> getGroup() {
     return group;
   }
 
-  public String getPayloadClass() {
+  public Optional<String> getPayloadClass() {
     return payloadClass;
   }
 
-  public Object getCustomDetails() {
+  public Optional<Object> getCustomDetails() {
     return customDetails;
   }
 
   private Payload(
       String summary,
       String source,
-      String severity,
-      Instant timestamp,
-      String component,
-      String group,
-      String payloadClass,
-      Object customDetails) {
+      Severity severity,
+      Optional<Instant> timestamp,
+      Optional<String> component,
+      Optional<String> group,
+      Optional<String> payloadClass,
+      Optional<Object> customDetails) {
     if (summary == null) {
       throw new IllegalStateException("Summary is required on class pagerdutyevents.Payload");
     }
@@ -84,12 +94,12 @@ public class Payload {
   public static class Builder {
     private String summary;
     private String source;
-    private String severity;
-    private Instant timestamp;
-    private String component;
-    private String group;
-    private String payloadClass;
-    private Object customDetails;
+    private Severity severity;
+    private Optional<Instant> timestamp = Optional.empty();
+    private Optional<String> component = Optional.empty();
+    private Optional<String> group = Optional.empty();
+    private Optional<String> payloadClass = Optional.empty();
+    private Optional<Object> customDetails = Optional.empty();
 
     private Builder() {}
 
@@ -103,33 +113,33 @@ public class Payload {
       return this;
     }
 
-    public Builder severity(String severity) {
+    public Builder severity(Severity severity) {
       this.severity = severity;
       return this;
     }
 
     public Builder timestamp(Instant timestamp) {
-      this.timestamp = timestamp;
+      this.timestamp = Optional.of(timestamp);
       return this;
     }
 
     public Builder component(String component) {
-      this.component = component;
+      this.component = Optional.of(component);
       return this;
     }
 
     public Builder group(String group) {
-      this.group = group;
+      this.group = Optional.of(group);
       return this;
     }
 
     public Builder payloadClass(String payloadClass) {
-      this.payloadClass = payloadClass;
+      this.payloadClass = Optional.of(payloadClass);
       return this;
     }
 
     public Builder customDetails(Object customDetails) {
-      this.customDetails = customDetails;
+      this.customDetails = Optional.of(customDetails);
       return this;
     }
 

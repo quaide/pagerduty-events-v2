@@ -1,13 +1,15 @@
 package pagerdutyevents;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Optional;
 
+@JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class EventsRequest {
   public enum EventAction {
-    trigger,
-    acknowledge,
-    resolve
+    TRIGGER,
+    ACKNOWLEDGE,
+    RESOLVE
   }
 
   @JsonProperty("payload")
@@ -61,14 +63,14 @@ public class EventsRequest {
       throw new IllegalStateException(
           "Event Action is required on class pagerdutyevents.EventsRequest");
     }
-    if (builder.eventAction.equals(EventAction.trigger) && builder.payload == null) {
+    if (builder.eventAction.equals(EventAction.TRIGGER) && builder.payload == null) {
       throw new IllegalStateException(
           "pagerdutyevents.Payload is required on class pagerdutyevents.EventsRequest");
     }
-    if (builder.eventAction.equals(EventAction.acknowledge) && builder.dedupKey.isEmpty()) {
+    if (builder.eventAction.equals(EventAction.ACKNOWLEDGE) && builder.dedupKey.isEmpty()) {
       throw new IllegalStateException("Dedup Key is required to acknowledge an event");
     }
-    if (builder.eventAction.equals(EventAction.resolve) && builder.dedupKey.isEmpty()) {
+    if (builder.eventAction.equals(EventAction.RESOLVE) && builder.dedupKey.isEmpty()) {
       throw new IllegalStateException("Dedup Key is required to resolve an event");
     }
 
@@ -110,7 +112,7 @@ public class EventsRequest {
     }
 
     public Builder dedupKey(String dedupKey) {
-      this.dedupKey = Optional.ofNullable(dedupKey);
+      this.dedupKey = Optional.of(dedupKey);
       return this;
     }
 
