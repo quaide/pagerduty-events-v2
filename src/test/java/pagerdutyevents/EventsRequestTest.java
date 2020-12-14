@@ -13,7 +13,11 @@ public class EventsRequestTest {
   @Test
   public void routingKeyRequired() {
     Payload payload =
-        Payload.builder().source("source").summary("summary").severity("severity").build();
+        Payload.builder()
+            .source("source")
+            .summary("summary")
+            .severity(Payload.Severity.info)
+            .build();
 
     Assertions.assertThrows(
         IllegalStateException.class,
@@ -28,7 +32,11 @@ public class EventsRequestTest {
   @Test
   public void eventActionRequired() {
     Payload payload =
-        Payload.builder().source("source").summary("summary").severity("severity").build();
+        Payload.builder()
+            .source("source")
+            .summary("summary")
+            .severity(Payload.Severity.info)
+            .build();
 
     Assertions.assertThrows(
         IllegalStateException.class,
@@ -52,7 +60,11 @@ public class EventsRequestTest {
   @Test
   public void dedupKeyRequiredOnAcknowledge() {
     Payload payload =
-        Payload.builder().source("source").summary("summary").severity("severity").build();
+        Payload.builder()
+            .source("source")
+            .summary("summary")
+            .severity(Payload.Severity.info)
+            .build();
 
     Assertions.assertThrows(
         IllegalStateException.class,
@@ -68,7 +80,11 @@ public class EventsRequestTest {
   @Test
   public void dedupKeyRequiredOnResolve() {
     Payload payload =
-        Payload.builder().source("source").summary("summary").severity("severity").build();
+        Payload.builder()
+            .source("source")
+            .summary("summary")
+            .severity(Payload.Severity.info)
+            .build();
 
     Assertions.assertThrows(
         IllegalStateException.class,
@@ -95,7 +111,7 @@ public class EventsRequestTest {
         Payload.builder()
             .summary("summary")
             .source("source")
-            .severity("severity")
+            .severity(Payload.Severity.info)
             .timestamp(Instant.EPOCH)
             .component("component")
             .group("group")

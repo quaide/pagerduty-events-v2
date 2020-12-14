@@ -38,7 +38,11 @@ public class PagerDutyEventsV2ClientTest {
                 ArgumentMatchers.eq(HttpResponse.BodyHandlers.ofString())))
         .thenThrow(InterruptedException.class);
     Payload payload =
-        Payload.builder().summary("test alert").severity("info").source("test source").build();
+        Payload.builder()
+            .summary("test alert")
+            .severity(Payload.Severity.info)
+            .source("test source")
+            .build();
     EventsRequest eventsRequest =
         EventsRequest.builder()
             .routingKey(ROUTING_KEY)
@@ -58,7 +62,11 @@ public class PagerDutyEventsV2ClientTest {
   public void postTrigger() throws PagerDutyStateException {
     stubHttpClientAndResponse();
     Payload payload =
-        Payload.builder().summary("test alert").severity("info").source("test source").build();
+        Payload.builder()
+            .summary("test alert")
+            .severity(Payload.Severity.info)
+            .source("test source")
+            .build();
     EventsRequest eventsRequest =
         EventsRequest.builder()
             .routingKey(ROUTING_KEY)

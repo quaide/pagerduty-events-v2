@@ -30,7 +30,7 @@ public class Link {
 
   static class Builder {
     private String href;
-    private Optional<String> text;
+    private Optional<String> text = Optional.empty();
 
     private Builder() {}
 

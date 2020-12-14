@@ -1,8 +1,10 @@
 package pagerdutyevents;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Optional;
 
+@JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class EventsRequest {
   public enum EventAction {
     trigger,
@@ -110,7 +112,7 @@ public class EventsRequest {
     }
 
     public Builder dedupKey(String dedupKey) {
-      this.dedupKey = Optional.ofNullable(dedupKey);
+      this.dedupKey = Optional.of(dedupKey);
       return this;
     }
 
