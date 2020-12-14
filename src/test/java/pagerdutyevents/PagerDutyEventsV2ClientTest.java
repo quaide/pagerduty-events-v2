@@ -40,13 +40,13 @@ public class PagerDutyEventsV2ClientTest {
     Payload payload =
         Payload.builder()
             .summary("test alert")
-            .severity(Payload.Severity.info)
+            .severity(Payload.Severity.INFO)
             .source("test source")
             .build();
     EventsRequest eventsRequest =
         EventsRequest.builder()
             .routingKey(ROUTING_KEY)
-            .eventAction(EventsRequest.EventAction.trigger)
+            .eventAction(EventsRequest.EventAction.TRIGGER)
             .dedupKey(DEDUP_KEY)
             .payload(payload)
             .build();
@@ -64,13 +64,13 @@ public class PagerDutyEventsV2ClientTest {
     Payload payload =
         Payload.builder()
             .summary("test alert")
-            .severity(Payload.Severity.info)
+            .severity(Payload.Severity.INFO)
             .source("test source")
             .build();
     EventsRequest eventsRequest =
         EventsRequest.builder()
             .routingKey(ROUTING_KEY)
-            .eventAction(EventsRequest.EventAction.trigger)
+            .eventAction(EventsRequest.EventAction.TRIGGER)
             .dedupKey(DEDUP_KEY)
             .payload(payload)
             .build();
@@ -103,7 +103,7 @@ public class PagerDutyEventsV2ClientTest {
   @Test
   public void postAcknowledge() throws PagerDutyStateException {
     stubHttpClientAndResponse();
-    EventsRequest eventsRequest = eventsRequestFrom(EventsRequest.EventAction.acknowledge);
+    EventsRequest eventsRequest = eventsRequestFrom(EventsRequest.EventAction.ACKNOWLEDGE);
 
     EventsResponse eventsResponse = pagerDutyEventsV2Client.post(eventsRequest);
 
@@ -113,7 +113,7 @@ public class PagerDutyEventsV2ClientTest {
   @Test
   public void postResolve() throws PagerDutyStateException {
     stubHttpClientAndResponse();
-    EventsRequest eventsRequest = eventsRequestFrom(EventsRequest.EventAction.resolve);
+    EventsRequest eventsRequest = eventsRequestFrom(EventsRequest.EventAction.RESOLVE);
 
     EventsResponse eventsResponse = pagerDutyEventsV2Client.post(eventsRequest);
 

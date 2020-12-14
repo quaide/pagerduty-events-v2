@@ -16,14 +16,14 @@ public class EventsRequestTest {
         Payload.builder()
             .source("source")
             .summary("summary")
-            .severity(Payload.Severity.info)
+            .severity(Payload.Severity.INFO)
             .build();
 
     Assertions.assertThrows(
         IllegalStateException.class,
         () -> {
           EventsRequest.builder()
-              .eventAction(EventsRequest.EventAction.trigger)
+              .eventAction(EventsRequest.EventAction.TRIGGER)
               .payload(payload)
               .build();
         });
@@ -35,7 +35,7 @@ public class EventsRequestTest {
         Payload.builder()
             .source("source")
             .summary("summary")
-            .severity(Payload.Severity.info)
+            .severity(Payload.Severity.INFO)
             .build();
 
     Assertions.assertThrows(
@@ -51,7 +51,7 @@ public class EventsRequestTest {
         IllegalStateException.class,
         () -> {
           EventsRequest.builder()
-              .eventAction(EventsRequest.EventAction.trigger)
+              .eventAction(EventsRequest.EventAction.TRIGGER)
               .routingKey("routing key")
               .build();
         });
@@ -63,14 +63,14 @@ public class EventsRequestTest {
         Payload.builder()
             .source("source")
             .summary("summary")
-            .severity(Payload.Severity.info)
+            .severity(Payload.Severity.INFO)
             .build();
 
     Assertions.assertThrows(
         IllegalStateException.class,
         () -> {
           EventsRequest.builder()
-              .eventAction(EventsRequest.EventAction.acknowledge)
+              .eventAction(EventsRequest.EventAction.ACKNOWLEDGE)
               .routingKey("routing key")
               .payload(payload)
               .build();
@@ -83,14 +83,14 @@ public class EventsRequestTest {
         Payload.builder()
             .source("source")
             .summary("summary")
-            .severity(Payload.Severity.info)
+            .severity(Payload.Severity.INFO)
             .build();
 
     Assertions.assertThrows(
         IllegalStateException.class,
         () -> {
           EventsRequest.builder()
-              .eventAction(EventsRequest.EventAction.resolve)
+              .eventAction(EventsRequest.EventAction.RESOLVE)
               .routingKey("routing key")
               .payload(payload)
               .build();
@@ -111,7 +111,7 @@ public class EventsRequestTest {
         Payload.builder()
             .summary("summary")
             .source("source")
-            .severity(Payload.Severity.info)
+            .severity(Payload.Severity.INFO)
             .timestamp(Instant.EPOCH)
             .component("component")
             .group("group")
@@ -122,7 +122,7 @@ public class EventsRequestTest {
         EventsRequest.builder()
             .payload(payload)
             .routingKey(ROUTING_KEY)
-            .eventAction(EventsRequest.EventAction.trigger)
+            .eventAction(EventsRequest.EventAction.TRIGGER)
             .dedupKey(DEDUP_KEY)
             .images(images)
             .links(links)
@@ -130,7 +130,7 @@ public class EventsRequestTest {
 
     Assertions.assertEquals(payload, eventsRequest.getPayload());
     Assertions.assertEquals(ROUTING_KEY, eventsRequest.getRoutingKey());
-    Assertions.assertEquals(EventsRequest.EventAction.trigger, eventsRequest.getEventAction());
+    Assertions.assertEquals(EventsRequest.EventAction.TRIGGER, eventsRequest.getEventAction());
     Assertions.assertEquals(Optional.of(DEDUP_KEY), eventsRequest.getDedupKey());
     Assertions.assertEquals(images, eventsRequest.getImages());
     Assertions.assertEquals(links, eventsRequest.getLinks());

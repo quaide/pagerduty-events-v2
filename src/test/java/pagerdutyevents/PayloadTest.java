@@ -19,7 +19,7 @@ public class PayloadTest {
     Assertions.assertThrows(
         IllegalStateException.class,
         () -> {
-          Payload.builder().severity(Payload.Severity.warning).source("source").build();
+          Payload.builder().severity(Payload.Severity.WARNING).source("source").build();
         });
   }
 
@@ -28,7 +28,7 @@ public class PayloadTest {
     Assertions.assertThrows(
         IllegalStateException.class,
         () -> {
-          Payload.builder().summary("summary").severity(Payload.Severity.error).build();
+          Payload.builder().summary("summary").severity(Payload.Severity.ERROR).build();
         });
   }
 
@@ -38,12 +38,12 @@ public class PayloadTest {
         Payload.builder()
             .summary("summary")
             .source("source")
-            .severity(Payload.Severity.critical)
+            .severity(Payload.Severity.CRITICAL)
             .build();
 
     Assertions.assertEquals("summary", payload.getSummary());
     Assertions.assertEquals("source", payload.getSource());
-    Assertions.assertEquals(Payload.Severity.critical, payload.getSeverity());
+    Assertions.assertEquals(Payload.Severity.CRITICAL, payload.getSeverity());
     Assertions.assertTrue(payload.getTimestamp().isEmpty());
     Assertions.assertTrue(payload.getComponent().isEmpty());
     Assertions.assertTrue(payload.getGroup().isEmpty());
@@ -57,7 +57,7 @@ public class PayloadTest {
         Payload.builder()
             .summary("summary")
             .source("source")
-            .severity(Payload.Severity.info)
+            .severity(Payload.Severity.INFO)
             .timestamp(Instant.EPOCH)
             .component("component")
             .group("group")
@@ -67,7 +67,7 @@ public class PayloadTest {
 
     Assertions.assertEquals("summary", payload.getSummary());
     Assertions.assertEquals("source", payload.getSource());
-    Assertions.assertEquals(Payload.Severity.info, payload.getSeverity());
+    Assertions.assertEquals(Payload.Severity.INFO, payload.getSeverity());
     Assertions.assertEquals(Instant.EPOCH, payload.getTimestamp().orElseThrow());
     Assertions.assertEquals("component", payload.getComponent().orElseThrow());
     Assertions.assertEquals("group", payload.getGroup().orElseThrow());

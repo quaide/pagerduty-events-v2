@@ -8,10 +8,10 @@ import java.util.Optional;
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class Payload {
   public enum Severity {
-    info,
-    warning,
-    error,
-    critical
+    INFO,
+    WARNING,
+    ERROR,
+    CRITICAL
   }
 
   @JsonProperty private String summary;
