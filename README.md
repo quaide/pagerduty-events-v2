@@ -5,7 +5,7 @@ A lightweight and flexible Java client designed to work with the [PagerDuty Even
 ## Getting Started
 
 ### Installation
-The client can be added with your favorite dependency management tool:
+The client can be added with your favorite dependency management tool, the latest version can be found here: https://search.maven.org/artifact/io.github.quaide/pagerduty-events-v2-client. 
 
 #### Maven
 ```
@@ -25,27 +25,22 @@ dependencies {
 
 ### Usage
 
-The client will communicate to the PagerDuty API through an `EventRequest` which contains a `Payload`. The `EventRequest` will be serialized to JSON. 
+The `PagerDutyEventsV2Client` constructor optionally takes an [`HttpClient`](https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpClient.html). `HttpClient httpClient = HttpClient.newHttpClient();` returns a new `HttpClient` with default settings. 
 
-Creating an instance of `PagerDutyEventsV2Client` requires an [`HttpClient`](https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpClient.html). `HttpClient httpClient = HttpClient.newHttpClient();` returns a new `HttpClient` with default settings.
+To build a request, you must build an instance of `EventsRequest`. The following fields are required:
 
-The `EventRequest` and its `Payload` are created through a builder. The following fields are required:
-
-`EventRequest`:
-- `routing_key`
-- `event_action`
-  - When `event_action` is an *acknowledge* or a *resolve*, `dedupKey` is required on the `EventRequest`.
-- `Payload`
-
-
-`Payload`:
-- `summary`
-- `source`
-- `severity`
+`EventsRequest`:
+- `routingKey`
+- `eventAction`
+- `dedupKey` (required IFF the value of `eventAction` is `acknowledge` or `resolve`) 
+- `payload`
+  - `summary`
+  - `source`
+  - `severity`
 
 Refer to [PagerDuty documentation](https://developer.pagerduty.com/docs/events-api-v2/trigger-events/) for more information regarding their API.
 
-After building your `EventRequest`, the HTTP request will be sent with `pagerDutyEventsV2Client.post()`. Information given by the PagerDuty service can be captured in an `EventsResponse`, which is the return type of `pagerDutyEventsV2Client.post()`. 
+After building your `EventRequest`, the request can be POSTed via `pagerDutyEventsV2Client.post()`.
 
 The following is a complete example:
 
